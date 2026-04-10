@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Propaganda Exclusiva - Oferta Imperdível</title>
+    <title>Promoção Exclusiva - Oferta Especial</title>
     <style>
         * {
             margin: 0;
@@ -73,7 +73,7 @@
             animation: fadeIn 0.3s ease-out;
         }
 
-        /* CARD DA PROPAGANDA (comercial) */
+        /* CARD DA PROPAGANDA (comercial) - TODO CARD É CLICÁVEL */
         .ad-card {
             position: relative;
             width: 90%;
@@ -82,14 +82,19 @@
             border-radius: 2rem;
             box-shadow: 0 30px 45px -20px black, 0 0 0 1px rgba(255,215,150,0.6) inset;
             overflow: hidden;
-            transition: transform 0.2s ease;
-            animation: slideUp 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transition: transform 0.2s ease, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .ad-card:hover {
+            transform: scale(1.01);
+            box-shadow: 0 35px 50px -18px black;
         }
 
         /* área de destaque da propaganda */
         .ad-header {
             background: linear-gradient(112deg, #ff7b2c, #ff3a00);
-            padding: 1.8rem 1.5rem 1rem;
+            padding: 1.5rem 1.5rem 0.8rem;
             text-align: center;
             color: white;
         }
@@ -114,7 +119,7 @@
         }
 
         .ad-header .offer {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             background: rgba(0,0,0,0.2);
             display: inline-block;
@@ -123,20 +128,32 @@
             backdrop-filter: blur(2px);
         }
 
-        .ad-body {
-            padding: 1.8rem 1.8rem 2rem;
-            text-align: center;
+        /* Área da imagem do produto (clicável) */
+        .product-image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0 0.5rem;
         }
 
-        .product-icon {
-            font-size: 3.8rem;
-            margin-bottom: 0.8rem;
+        .product-image img {
+            max-width: 85%;
+            border-radius: 1.5rem;
+            box-shadow: 0 15px 25px -8px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            background-color: white;
+        }
+
+        .ad-body {
+            padding: 1rem 1.8rem 1.8rem;
+            text-align: center;
         }
 
         .ad-body h3 {
             font-size: 1.7rem;
             color: #2d1b00;
-            margin-bottom: 0.5rem;
+            margin: 0.5rem 0 0.2rem;
             font-weight: 800;
         }
 
@@ -145,7 +162,7 @@
             display: inline-block;
             padding: 0.4rem 1.2rem;
             border-radius: 50px;
-            margin: 1rem 0;
+            margin: 0.8rem 0;
             font-weight: bold;
         }
 
@@ -169,7 +186,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             color: #b45116;
-            margin-top: 1.2rem;
+            margin-top: 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -180,15 +197,15 @@
             font-size: 1.2rem;
         }
 
-        /* BOTÃO FECHAR (X) - REDIRECIONA */
+        /* BOTÃO FECHAR (X) - também redireciona mas com estilo destacado */
         .close-redirect {
             position: absolute;
             top: 16px;
             right: 16px;
             width: 40px;
             height: 40px;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(5px);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -199,36 +216,35 @@
             cursor: pointer;
             transition: all 0.2s ease;
             border: none;
-            z-index: 20;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 25;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
             font-family: monospace;
             line-height: 1;
         }
 
         .close-redirect:hover {
             background: #ff3a00;
-            transform: scale(1.07);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+            transform: scale(1.08);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
         }
 
         .close-redirect:active {
-            transform: scale(0.96);
+            transform: scale(0.94);
         }
 
-        /* Pequeno texto auxiliar informativo */
         .info-tooltip {
             font-size: 0.7rem;
             text-align: center;
             margin-top: 1rem;
             color: #7a5a3a;
-            background: rgba(255,235,205,0.7);
+            background: rgba(255,235,205,0.8);
             border-radius: 20px;
             padding: 6px 12px;
             display: inline-block;
             width: auto;
         }
 
-        /* keyframes animações */
+        /* Animação */
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -266,6 +282,9 @@
                 top: 12px;
                 right: 12px;
             }
+            .product-image img {
+                max-width: 90%;
+            }
         }
     </style>
 </head>
@@ -273,41 +292,47 @@
 
     <!-- Conteúdo simulado do site (apenas para contexto visual) -->
     <div class="page-content">
-        <h1>✨ Bem-vindo ao site ✨</h1>
-        <p>Conteúdo principal do portal. Aqui você encontra notícias, tendências e muito mais.</p>
+        <h1>✨ Bem-vindo ao melhor conteúdo ✨</h1>
+        <p>Dicas, reviews e ofertas imperdíveis para você.</p>
         <div class="mock-card">
-            <p>📰 Artigo em destaque: As últimas inovações em tecnologia e marketing digital.</p>
-            <p style="font-size:0.9rem; color:#5a6e7a;">⬅️ Anúncio especial ao centro — clique no "X" para oferta relâmpago!</p>
+            <p>📢 <strong>Anúncio especial:</strong> Clique na imagem do produto ou no card e garanta seu desconto!</p>
+            <p style="font-size:0.9rem; color:#5a6e7a;">⬅️ Propaganda interativa — qualquer clique direciona para a oferta.</p>
         </div>
-        <p style="margin-top: 1.5rem; font-size:0.85rem;">🎯 Propaganda com redirecionamento instantâneo ao clicar no botão fechar.</p>
+        <p style="margin-top: 1.5rem; font-size:0.85rem;">🎯 Oferta válida por tempo limitado. Clique no anúncio e aproveite.</p>
     </div>
 
-    <!-- MÓDULO DA PROPAGANDA (comercial com X no cantinho) -->
+    <!-- MÓDULO DA PROPAGANDA (todo o card é clicável, inclusive a imagem) -->
     <div class="ad-overlay" id="adPropaganda">
-        <div class="ad-card" role="dialog" aria-label="Propaganda com oferta especial">
-            <!-- Botão X que redireciona (fechar = redirect) -->
+        <div class="ad-card" id="adCard" role="dialog" aria-label="Propaganda com oferta especial - clique em qualquer lugar">
+            <!-- Botão X que também redireciona (prioridade para evitar duplo clique) -->
             <button class="close-redirect" id="closeRedirectBtn" aria-label="Fechar propaganda e ser redirecionado">✕</button>
             
-            <!-- Conteúdo visual da propaganda -->
+            <!-- Conteúdo visual da propaganda com imagem real -->
             <div class="ad-header">
-                <div class="badge">🔥 PROMOÇÃO EXCLUSIVA 🔥</div>
-                <h2>SUPER SALE</h2>
-                <div class="offer">Desconto relâmpago de 70% OFF</div>
+                <div class="badge">🔥 OPORTUNIDADE ÚNICA 🔥</div>
+                <h2>MEGA SALE</h2>
+                <div class="offer">Desconto relâmpago • 70% OFF</div>
             </div>
+            
+            <!-- ÁREA DA IMAGEM - CLIQUE AQUI TAMBÉM REDIRECIONA -->
+            <div class="product-image">
+                <img src="https://placehold.co/600x400/FF7B2C/white?text=🔥+OFERTA+IMPACTANTE+🔥&font=montserrat" 
+                     alt="Produto em promoção - Imagem clicável"
+                     style="width:100%; max-width:320px; object-fit:cover;">
+            </div>
+            
             <div class="ad-body">
-                <div class="product-icon">🚀🎧</div>
-                <h3>Kit HyperSound Pro</h3>
-                <p style="color: #5e3a1f;">Cancelamento de ruído + Bass infinito. Edição limitada.</p>
+                <h3>HyperSound Pro Max</h3>
+                <p style="color: #5e3a1f;">Tecnologia de ponta | Cancelamento Ativo | 50h de bateria</p>
                 <div class="price">
                     <span class="old-price">R$ 597,00</span>
                     <span class="new-price">R$ 179,90</span>
                 </div>
                 <div class="cta-note">
-                    <span>⚠️</span> Clique no <strong>✕</strong> acima e garanta agora!
-                    <span>⚠️</span>
+                    <span>⚡</span> CLIQUE EM QUALQUER LUGAR DO ANÚNCIO <span>⚡</span>
                 </div>
                 <div class="info-tooltip">
-                    💡 Ao fechar esta propaganda você será redirecionado para a oferta oficial
+                    💡 Ao clicar na imagem, no texto ou no X você será redirecionado para a oferta
                 </div>
             </div>
             <!-- pequeno rodapé decorativo -->
@@ -316,66 +341,78 @@
     </div>
 
     <script>
-        // URL de redirecionamento fornecida pelo cliente
-        const REDIRECT_URL = "https://bibianoadsglobal-creator.github.io/redirect-site/";
+        // URL de redirecionamento atualizada (fornecida pelo cliente)
+        const REDIRECT_URL = "https://www.profitablecpmratenetwork.com/yid27hpsg?key=6601f5254f7607cadd89d5d4d5d1a737";
         
-        // Obtém o botão de fechar (X)
+        // Elementos principais
         const closeBtn = document.getElementById('closeRedirectBtn');
+        const adCard = document.getElementById('adCard');
+        const overlay = document.getElementById('adPropaganda');
         
-        // Evento de clique no X: redireciona imediatamente para a URL
-        // Isso atende exatamente ao requisito: "botão fechar é o redirect"
+        // Função de redirecionamento segura
+        function redirectToOffer() {
+            window.location.href = REDIRECT_URL;
+        }
+        
+        // 1. Clique no botão X (fechar) -> redireciona e impede propagação para o card
         if (closeBtn) {
             closeBtn.addEventListener('click', function(event) {
-                // Impede qualquer ação padrão indesejada (caso houvesse algum comportamento extra)
                 event.preventDefault();
-                // Realiza o redirecionamento para o link do comercial
-                window.location.href = REDIRECT_URL;
+                event.stopPropagation();   // Evita que o clique no X também dispare o evento do card
+                redirectToOffer();
             });
-        }
-        
-        // Opcional: Caso queira garantir que a propaganda não possa ser fechada por outros meios (tecla ESC ou clique no backdrop)
-        // O requisito NÃO pede para fechar sem redirecionar, então impedimos fechamento indesejado.
-        // O overlay não terá evento de clique para fechar, mas caso alguém tente clicar no fundo, NÃO fará nada (sem redirect, sem fechar).
-        const adOverlay = document.getElementById('adPropaganda');
-        if (adOverlay) {
-            // Evita que cliques no fundo (backdrop) fechem o modal - a única maneira de "fechar" é clicando no X, que redireciona.
-            // Isso garante que o usuário não escape do redirecionamento.
-            adOverlay.addEventListener('click', function(e) {
-                // Se o clique foi exatamente no overlay (fundo escuro), não faz nada (não fecha, nem redireciona)
-                // Dessa forma o X continua sendo o único meio de saída + redirecionamento.
-                if (e.target === adOverlay) {
-                    // Nenhuma ação - mantém a propaganda visível.
-                    // Isso reforça a experiência do comercial.
-                    e.stopPropagation();
-                }
-            });
-        }
-
-        // Além disso, previnimos que a tecla "Escape" feche o modal (não há lógica de fechamento sem redirect)
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                // Impede que o escape feche a propaganda, pois isso não redirecionaria.
-                // O único comportamento desejado: ao clicar no X, redireciona.
-                // Não fazemos nada ao pressionar ESC.
-                e.preventDefault();
-                // Opcional: um pequeno lembrete silencioso (sem interferência)
-                console.log("Para aproveitar a oferta, clique no X da propaganda.");
-            }
-        });
-        
-        // Pequeno ajuste de acessibilidade: se o botão receber foco, Enter/Space também redirecionam (já é comportamento padrão de clique)
-        // Mas garantimos que evento de tecla no botão também dispare redirect (para usuários de teclado)
-        if (closeBtn) {
+            
+            // Acessibilidade: tecla Enter ou Espaço no botão também redireciona
             closeBtn.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
-                    window.location.href = REDIRECT_URL;
+                    e.stopPropagation();
+                    redirectToOffer();
                 }
             });
         }
         
-        // (Extra) Exibe no console para desenvolvedor: informação do redirecionamento
-        console.log("✅ Propaganda ativa: Clique no X para redirecionar para: " + REDIRECT_URL);
+        // 2. Clique em QUALQUER parte do card de propaganda (incluindo imagem, texto, preço, etc)
+        //    Exceto quando o clique for diretamente no botão X (já tratado com stopPropagation)
+        if (adCard) {
+            adCard.addEventListener('click', function(event) {
+                // Garantir que se o clique foi no botão X ou em algum filho do X, não dispare novamente.
+                // O botão X já tem seu próprio redirecionamento e já chamou stopPropagation,
+                // mas por segurança verificamos se o target ou parente é o botão close.
+                let target = event.target;
+                let isCloseButton = (target === closeBtn || closeBtn.contains(target));
+                if (!isCloseButton) {
+                    // Qualquer outra região do card (imagem, título, fundo, preço, etc) redireciona
+                    redirectToOffer();
+                }
+            });
+        }
+        
+        // 3. Impedir que clique no overlay (fundo escuro) feche ou redirecione.
+        //    O usuário só consegue sair clicando no X (que redireciona) ou clicando no card (redireciona).
+        if (overlay) {
+            overlay.addEventListener('click', function(e) {
+                // Se o clique for exatamente no overlay (fundo escuro) não faz nada
+                if (e.target === overlay) {
+                    e.stopPropagation();
+                    // Não redireciona, não fecha. A propaganda permanece.
+                }
+            });
+        }
+        
+        // 4. Previnir que a tecla ESC feche o modal (pois o único "fechamento" é o redirecionamento)
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                e.preventDefault();
+                // Exibe um lembrete silencioso no console, mas não atrapalha a experiência.
+                console.log("🔊 Clique no anúncio ou no X para ser redirecionado à oferta.");
+            }
+        });
+        
+        // 5. Estilo extra: cursor pointer já aplicado no .ad-card via CSS.
+        //    Dica visual de que tudo é clicável.
+        
+        console.log("✅ Propaganda carregada: qualquer clique na imagem, texto ou card redireciona para:", REDIRECT_URL);
     </script>
 </body>
 </html>
