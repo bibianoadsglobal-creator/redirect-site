@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Promoção Exclusiva - Oferta Especial</title>
+    <title>Espaço Digital | Plataforma para Empreendedores</title>
     <style>
         * {
             margin: 0;
@@ -12,407 +12,157 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(145deg, #e0eafc 0%, #cfdef3 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Conteúdo principal simulado (apenas para dar contexto) */
-        .page-content {
-            max-width: 900px;
-            margin: 2rem;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(4px);
-            border-radius: 2rem;
-            box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            transition: all 0.2s;
-        }
-
-        .page-content h1 {
-            font-size: 2.5rem;
-            color: #1e2a3a;
-            margin-bottom: 1rem;
-            letter-spacing: -0.5px;
-        }
-
-        .page-content p {
-            font-size: 1.2rem;
-            color: #2c3e4e;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fe 0%, #e9eefa 100%);
+            color: #1a2c3e;
             line-height: 1.5;
-            margin-bottom: 1rem;
+            padding: 20px;
         }
 
-        .page-content .mock-card {
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
             background: white;
-            padding: 1rem;
-            border-radius: 1.5rem;
-            margin-top: 1rem;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-        }
-
-        /* OVERLAY DA PROPAGANDA (modal centralizado) */
-        .ad-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.75);
-            backdrop-filter: blur(6px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            animation: fadeIn 0.3s ease-out;
-        }
-
-        /* CARD DA PROPAGANDA (comercial) - TODO CARD É CLICÁVEL */
-        .ad-card {
-            position: relative;
-            width: 90%;
-            max-width: 500px;
-            background: linear-gradient(135deg, #ffffff 0%, #fff6ea 100%);
-            border-radius: 2rem;
-            box-shadow: 0 30px 45px -20px black, 0 0 0 1px rgba(255,215,150,0.6) inset;
+            border-radius: 32px;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
             overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s;
-            cursor: pointer;
         }
 
-        .ad-card:hover {
-            transform: scale(1.01);
-            box-shadow: 0 35px 50px -18px black;
-        }
-
-        /* área de destaque da propaganda */
-        .ad-header {
-            background: linear-gradient(112deg, #ff7b2c, #ff3a00);
-            padding: 1.5rem 1.5rem 0.8rem;
-            text-align: center;
+        .hero {
+            background: linear-gradient(135deg, #0b2b44 0%, #123e5e 100%);
             color: white;
+            padding: 3rem 2rem;
+            text-align: center;
         }
 
-        .badge {
-            background: #ffd966;
-            display: inline-block;
-            padding: 0.25rem 1rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            color: #b13e00;
-            letter-spacing: 1px;
+        .hero h1 {
+            font-size: 2.2rem;
             margin-bottom: 1rem;
+            font-weight: 700;
         }
 
-        .ad-header h2 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-        }
-
-        .ad-header .offer {
-            font-size: 1rem;
-            font-weight: 600;
-            background: rgba(0,0,0,0.2);
-            display: inline-block;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
-            backdrop-filter: blur(2px);
-        }
-
-        /* Área da imagem do produto (clicável) */
-        .product-image {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 1rem 0 0.5rem;
-        }
-
-        .product-image img {
-            max-width: 85%;
-            border-radius: 1.5rem;
-            box-shadow: 0 15px 25px -8px rgba(0,0,0,0.2);
-            transition: all 0.2s;
-            border: 2px solid rgba(255, 255, 255, 0.6);
-            background-color: white;
-        }
-
-        .ad-body {
-            padding: 1rem 1.8rem 1.8rem;
-            text-align: center;
-        }
-
-        .ad-body h3 {
-            font-size: 1.7rem;
-            color: #2d1b00;
-            margin: 0.5rem 0 0.2rem;
-            font-weight: 800;
-        }
-
-        .price {
-            background: #fef3e2;
-            display: inline-block;
-            padding: 0.4rem 1.2rem;
-            border-radius: 50px;
-            margin: 0.8rem 0;
-            font-weight: bold;
-        }
-
-        .price .old-price {
-            text-decoration: line-through;
-            color: #9b6a3c;
-            font-size: 1rem;
-            margin-right: 0.8rem;
-        }
-
-        .price .new-price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #d43f00;
-        }
-
-        .cta-note {
-            background: #fff0e0;
-            padding: 0.7rem;
-            border-radius: 60px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #b45116;
-            margin-top: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .cta-note span {
+        .hero p {
             font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
-        /* BOTÃO FECHAR (X) - também redireciona mas com estilo destacado */
-        .close-redirect {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            width: 40px;
-            height: 40px;
-            background: rgba(0, 0, 0, 0.65);
-            backdrop-filter: blur(5px);
-            border-radius: 50%;
+        .content {
+            padding: 2rem;
+        }
+
+        .benefits {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            font-weight: bold;
-            color: white;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-            z-index: 25;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            font-family: monospace;
-            line-height: 1;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .close-redirect:hover {
-            background: #ff3a00;
-            transform: scale(1.08);
-            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+        .card {
+            flex: 1;
+            min-width: 200px;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 24px;
+            transition: transform 0.2s;
         }
 
-        .close-redirect:active {
-            transform: scale(0.94);
+        .card:hover {
+            transform: translateY(-5px);
         }
 
-        .info-tooltip {
-            font-size: 0.7rem;
-            text-align: center;
-            margin-top: 1rem;
-            color: #7a5a3a;
-            background: rgba(255,235,205,0.8);
-            border-radius: 20px;
-            padding: 6px 12px;
+        .card h3 {
+            color: #0b2b44;
+            margin-bottom: 0.5rem;
+        }
+
+        .btn {
             display: inline-block;
-            width: auto;
+            background: #f97316;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            transition: 0.2s;
+            margin: 1rem 0;
+            box-shadow: 0 5px 15px rgba(249,115,22,0.3);
         }
 
-        /* Animação */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        .btn:hover {
+            background: #ea580c;
+            transform: scale(1.02);
         }
 
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .cta-center {
+            text-align: center;
+            margin: 2rem 0;
         }
 
-        /* Responsividade */
-        @media (max-width: 550px) {
-            .ad-card {
-                max-width: 92%;
-            }
-            .ad-header h2 {
-                font-size: 1.6rem;
-            }
-            .ad-body h3 {
-                font-size: 1.4rem;
-            }
-            .price .new-price {
-                font-size: 1.6rem;
-            }
-            .close-redirect {
-                width: 36px;
-                height: 36px;
-                font-size: 24px;
-                top: 12px;
-                right: 12px;
-            }
-            .product-image img {
-                max-width: 90%;
-            }
+        .footer {
+            background: #f1f5f9;
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+
+        .disclaimer {
+            font-size: 0.7rem;
+            margin-top: 1rem;
+            color: #6c757d;
+            text-align: center;
+        }
+
+        @media (max-width: 700px) {
+            .hero h1 { font-size: 1.6rem; }
+            .content { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
-
-    <!-- Conteúdo simulado do site (apenas para contexto visual) -->
-    <div class="page-content">
-        <h1>✨ Bem-vindo ao melhor conteúdo ✨</h1>
-        <p>Dicas, reviews e ofertas imperdíveis para você.</p>
-        <div class="mock-card">
-            <p>📢 <strong>Anúncio especial:</strong> Clique na imagem do produto ou no card e garanta seu desconto!</p>
-            <p style="font-size:0.9rem; color:#5a6e7a;">⬅️ Propaganda interativa — qualquer clique direciona para a oferta.</p>
-        </div>
-        <p style="margin-top: 1.5rem; font-size:0.85rem;">🎯 Oferta válida por tempo limitado. Clique no anúncio e aproveite.</p>
+<div class="container">
+    <div class="hero">
+        <h1>Sua plataforma completa para vender online</h1>
+        <p>Crie cursos, funis de vendas, e-mail marketing e muito mais – tudo em um só lugar. Comece grátis!</p>
     </div>
+    <div class="content">
+        <div class="benefits">
+            <div class="card">
+                <h3>🚀 Funis de Vendas</h3>
+                <p>Construtores visuais sem complicação, páginas que convertem.</p>
+            </div>
+            <div class="card">
+                <h3>📧 E-mail Marketing</h3>
+                <p>Automações, sequências e disparos ilimitados.</p>
+            </div>
+            <div class="card">
+                <h3>📚 Cursos Online</h3>
+                <p>Hospede seus cursos, crie área de membros e venda.</p>
+            </div>
+            <div class="card">
+                <h3>🤝 Programa de Afiliados</h3>
+                <p>Recursos completos para recrutar afiliados.</p>
+            </div>
+        </div>
 
-    <!-- MÓDULO DA PROPAGANDA (todo o card é clicável, inclusive a imagem) -->
-    <div class="ad-overlay" id="adPropaganda">
-        <div class="ad-card" id="adCard" role="dialog" aria-label="Propaganda com oferta especial - clique em qualquer lugar">
-            <!-- Botão X que também redireciona (prioridade para evitar duplo clique) -->
-            <button class="close-redirect" id="closeRedirectBtn" aria-label="Fechar propaganda e ser redirecionado">✕</button>
-            
-            <!-- Conteúdo visual da propaganda com imagem real -->
-            <div class="ad-header">
-                <div class="badge">🔥 OPORTUNIDADE ÚNICA 🔥</div>
-                <h2>MEGA SALE</h2>
-                <div class="offer">Desconto relâmpago • 70% OFF</div>
-            </div>
-            
-            <!-- ÁREA DA IMAGEM - CLIQUE AQUI TAMBÉM REDIRECIONA -->
-            <div class="product-image">
-                <img src="https://placehold.co/600x400/FF7B2C/white?text=🔥+OFERTA+IMPACTANTE+🔥&font=montserrat" 
-                     alt="Produto em promoção - Imagem clicável"
-                     style="width:100%; max-width:320px; object-fit:cover;">
-            </div>
-            
-            <div class="ad-body">
-                <h3>HyperSound Pro Max</h3>
-                <p style="color: #5e3a1f;">Tecnologia de ponta | Cancelamento Ativo | 50h de bateria</p>
-                <div class="price">
-                    <span class="old-price">R$ 597,00</span>
-                    <span class="new-price">R$ 179,90</span>
-                </div>
-                <div class="cta-note">
-                    <span>⚡</span> CLIQUE EM QUALQUER LUGAR DO ANÚNCIO <span>⚡</span>
-                </div>
-                <div class="info-tooltip">
-                    💡 Ao clicar na imagem, no texto ou no X você será redirecionado para a oferta
-                </div>
-            </div>
-            <!-- pequeno rodapé decorativo -->
-            <div style="height: 6px; background: linear-gradient(90deg, #ff7b2c, #ffb347);"></div>
+        <div class="cta-center">
+            <!-- ⚠️ BOTÃO COM SEU LINK DE AFILIADO -->
+            <a href="https://systeme.io/pt?sa=sa02694213881478e2572d634845d9dac8375083bd" class="btn" target="_blank" rel="nofollow sponsored">
+                🔥 COMEÇAR GRÁTIS AGORA
+            </a>
+            <p style="margin-top: 10px;">✅ Sem cartão de crédito. Conta gratuita permanente.</p>
+        </div>
+
+        <div class="disclaimer">
+            <strong>Divulgação de afiliado:</strong> Esta página contém links de afiliado. Se você adquirir um plano através deles, eu posso receber uma comissão, sem custo adicional para você.
         </div>
     </div>
-
-    <script>
-        // URL de redirecionamento atualizada (fornecida pelo cliente)
-        const REDIRECT_URL = "https://www.profitablecpmratenetwork.com/yid27hpsg?key=6601f5254f7607cadd89d5d4d5d1a737";
-        
-        // Elementos principais
-        const closeBtn = document.getElementById('closeRedirectBtn');
-        const adCard = document.getElementById('adCard');
-        const overlay = document.getElementById('adPropaganda');
-        
-        // Função de redirecionamento segura
-        function redirectToOffer() {
-            window.location.href = REDIRECT_URL;
-        }
-        
-        // 1. Clique no botão X (fechar) -> redireciona e impede propagação para o card
-        if (closeBtn) {
-            closeBtn.addEventListener('click', function(event) {
-                event.preventDefault();
-                event.stopPropagation();   // Evita que o clique no X também dispare o evento do card
-                redirectToOffer();
-            });
-            
-            // Acessibilidade: tecla Enter ou Espaço no botão também redireciona
-            closeBtn.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    redirectToOffer();
-                }
-            });
-        }
-        
-        // 2. Clique em QUALQUER parte do card de propaganda (incluindo imagem, texto, preço, etc)
-        //    Exceto quando o clique for diretamente no botão X (já tratado com stopPropagation)
-        if (adCard) {
-            adCard.addEventListener('click', function(event) {
-                // Garantir que se o clique foi no botão X ou em algum filho do X, não dispare novamente.
-                // O botão X já tem seu próprio redirecionamento e já chamou stopPropagation,
-                // mas por segurança verificamos se o target ou parente é o botão close.
-                let target = event.target;
-                let isCloseButton = (target === closeBtn || closeBtn.contains(target));
-                if (!isCloseButton) {
-                    // Qualquer outra região do card (imagem, título, fundo, preço, etc) redireciona
-                    redirectToOffer();
-                }
-            });
-        }
-        
-        // 3. Impedir que clique no overlay (fundo escuro) feche ou redirecione.
-        //    O usuário só consegue sair clicando no X (que redireciona) ou clicando no card (redireciona).
-        if (overlay) {
-            overlay.addEventListener('click', function(e) {
-                // Se o clique for exatamente no overlay (fundo escuro) não faz nada
-                if (e.target === overlay) {
-                    e.stopPropagation();
-                    // Não redireciona, não fecha. A propaganda permanece.
-                }
-            });
-        }
-        
-        // 4. Previnir que a tecla ESC feche o modal (pois o único "fechamento" é o redirecionamento)
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                e.preventDefault();
-                // Exibe um lembrete silencioso no console, mas não atrapalha a experiência.
-                console.log("🔊 Clique no anúncio ou no X para ser redirecionado à oferta.");
-            }
-        });
-        
-        // 5. Estilo extra: cursor pointer já aplicado no .ad-card via CSS.
-        //    Dica visual de que tudo é clicável.
-        
-        console.log("✅ Propaganda carregada: qualquer clique na imagem, texto ou card redireciona para:", REDIRECT_URL);
-    </script>
+    <div class="footer">
+        Espaço Digital © 2026 | Ferramenta para empreendedores
+    </div>
+</div>
 </body>
 </html>
